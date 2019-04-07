@@ -1,0 +1,13 @@
+FROM golang:1.12.1 AS builder
+
+# Change this path!
+WORKDIR /go/src/github.com/tommy-sho/microservice-sample/pkg/api
+COPY ./pkg/api .
+
+ENV GO111MODULE=on
+
+RUN go build -o api .
+
+EXPOSE 3000
+
+CMD [ "./api" ]
