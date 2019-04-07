@@ -1,13 +1,16 @@
 package main
 
 import (
+	"github.com/tommy-sho/microservice-sample/pkg/gcd/genproto/pb"
 	"net"
 	"log"
 
-	"github.com/tommy-sho/microservice-sample/pb"
+
 	context "golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
+
+
 )
 
 type server struct{}

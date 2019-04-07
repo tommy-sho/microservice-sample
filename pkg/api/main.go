@@ -7,7 +7,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/tommy-sho/microservice-sample/pb"
+	"github.com/tommy-sho/microservice-sample/pkg/api/genproto/pb"
+
 	"google.golang.org/grpc"
 )
 
