@@ -1,13 +1,17 @@
-FROM golang:1.12.1 AS builder
+FROM golang:1.12.0-alpine AS builder
 
-# Change this path!
+COPY . /go/src/github.com/tommy-sho/microservice-sample/
+
 WORKDIR /go/src/github.com/tommy-sho/microservice-sample/pkg/api
-COPY ./pkg/api .
 
 ENV GO111MODULE=on
 
-RUN go build -o api .
+RUN apk add alpine-sdk \
+        git
 
-EXPOSE 3000
+RUN GOOS=linux GOARCH=amd64 go build -o api .
 
-CMD [ "./api" ]
+From alpine:latest
+COPY --from=builder /go/src/github.com/tommy-sho/microservice-sample/pkg/api .
+
+CMD ["./api"]
