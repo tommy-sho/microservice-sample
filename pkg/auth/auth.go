@@ -35,7 +35,7 @@ func verify(auth string) error {
 }
 
 // UnaryServerInterceptor return unary server interface to process authentication for each request.
-func UnaryServerInterceptor(authFunc DefaultAuthFunc) grpc.UnaryServerInterceptor {
+func AuthUnaryServerInterceptor(authFunc DefaultAuthFunc) grpc.UnaryServerInterceptor {
 	return func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {
 		newCtx, err := authFunc(ctx)
 		if err != nil {
