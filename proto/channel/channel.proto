@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package musmus.channel;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "proto";
+
+service ChannelService {
+    // チャンネルの一覧を返却
+    rpc GetChannelList(GetChannelListRequest) returns (GetChannelListResponse)
+}
+
+message Channel {
+    string id = 1;
+    string name = 2;
+    bool isMember = 3;
+    bool isPrivate = 4;
+    repeated string members = 5;
+    string topic = 6;
+    google.protobuf.Timestamp created_at = 7;
+    google.protobuf.Timestamp updated_at = 8;
+}
+
+// ユーザが見れるチャンネルの一覧を返却
+message GetChannelListRequest {
+    string user_id = 1;
+    string room_id = 2;
+}
+
+message GetChannelListResponse {
+    repeated Channel channels = 1;
+}

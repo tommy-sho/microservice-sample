@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package musmus.video;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "proto";
+
+service VideoService {
+    // Return Video information by id
+    rpc GetVideoByID(GetVideoByIDRequest) returns (GetVideoByIDResponse) {}
+}
+
+message Video {
+    string id = 1;
+    string url = 2;
+    string user_id = 3;
+    int64 created_at = 4;
+    bool is_private = 5; //　non public image
+}
+
+message GetVideoByIDRequest {
+    string id = 1;
+}
+
+message GetVideoByIDResponse {
+    Video video = 1;
+}

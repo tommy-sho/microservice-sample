@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package musmus.image;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "proto";
+
+service ImageService {
+    // Return image information by id
+    rpc GetImageByID(GetImageByIDRequest) returns (GetImageByIDResponse) {}
+}
+
+message Image {
+    string id = 1;
+    string url = 2;
+    string user_id = 3;
+    int64 created_at = 4;
+    bool is_private = 5; //　non public image
+}
+
+message GetImageByIDRequest {
+    string id = 1;
+}
+
+message GetImageByIDResponse {
+    Image image = 1;
+}

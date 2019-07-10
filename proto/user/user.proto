@@ -1,0 +1,155 @@
+syntax = "proto3";
+
+package musmus.user;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "proto";
+
+service UserService {
+    // SignAccount
+    rpc SignAccount(SignAccountRequest) returns (SignAccountResponse) {}
+    // Create user
+    rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {}
+    // Delete user
+    rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {}
+    // Update user information
+    rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {}
+    // Get user information by user_id
+    rpc GetUser(GetUserRequest) returns (GetUserResponse) {}
+    // Get users information by user_id list
+    rpc GetUsers(GetUsersRequest) returns (GetUsersResponse) {}
+    // Is user admin or not
+    rpc IsAdmin(IsAdminRequest) returns (IsAdminResponse) {}
+    // Follow user
+    rpc FollowUser(FollowUserRequest) returns (FollowUserResponse) {}
+    // Un Follow user
+    rpc UnFollowUser(UnFollowUserRequest) returns (UnFollowUserResponse) {}
+    // Get follower by user_id
+    rpc GetFollowers(GetFollowersRequest) returns (GetFollowersResponse) {}
+    // Get following user by user_id
+    rpc GetFollowingUsers(GetFollowingUsersRequest) returns (GetFollowingUsersRequest) {}
+}
+
+message User {
+    string id = 1; // user_id
+    string name = 2; // user's account name
+    string first_name = 3;
+    string last_name = 4;
+    string icon_image_url = 5;
+    string mail_address = 6;
+    string password = 7;
+    google.protobuf.Timestamp created_at = 8;
+    google.protobuf.Timestamp updated_at = 9;
+}
+
+message SignAccountRequest {
+    string user_id = 1;
+}
+
+message SignAccountResponse{
+    User user = 1;
+}
+
+message CreateUserRequest {
+    User user = 1;
+}
+
+
+message CreateUserResponse{
+    Status status = 1;
+}
+
+
+message DeleteUserRequest{
+    string user_id = 1;
+}
+
+
+message DeleteUserResponse{
+    Status status = 1;
+}
+
+
+message UpdateUserRequest{
+    User user = 1;
+}
+
+message UpdateUserResponse{
+    Status status = 1;
+}
+
+
+message GetUserRequest{
+   string user_id = 1;
+}
+
+message GetUserResponse{
+    User user = 1;
+}
+
+
+message GetUsersRequest{
+    repeated string user_ids = 1;
+}
+
+
+message GetUsersResponse{
+    repeated User user = 1;
+}
+
+message IsAdminRequest{
+    string user_id = 1;
+}
+
+message IsAdminResponse{
+    bool is_admin = 1;
+}
+
+
+message FollowUserRequest{
+    string following_user_id = 1; //　user_id which try to follow
+    string follow_user_id = 2; // user_id which to follow
+}
+
+
+message FollowUserResponse{
+    Status status = 1;
+}
+
+message UnFollowUserRequest{
+    string following_user_id = 1; //　user_id which try to unfollow
+    string follow_user_id = 2; // user_id which to unfollow
+}
+
+message UnFollowUserResponse{
+    Status status = 1;
+}
+
+
+message GetFollowersRequest{
+    string user_id = 1;
+}
+
+
+message GetFollowersResponse{
+    repeated User users = 1;
+}
+
+
+message GetFollowingUsersRequest{
+    string user_id = 1;
+}
+
+
+message GetFollowingUsersResponse{
+    repeated User users = 1;
+}
+
+enum Status {
+    SUCCESS = 0;
+    INVALID_REQUEST = 1;
+    ALREADY_EXISTS = 2;
+    INTERNAL_ERROR = 3;
+    NOT_PERMITTED = 4;
+}

@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package musmus.room;
+
+import "google/protobuf/timestamp.proto";
+import "../user/user.proto";
+
+option go_package = "proto";
+
+
+service RoomService {
+    rpc GetRoomDetail(GetRoomDetailRequest) returns (GetRoomDetailResponse) {}
+    rpc IsMember(IsMemberRequest) returns (IsMemberResponse) {}
+}
+
+message Room {
+    string id = 1;
+    string address = 2; //example: xxx.musmus.com
+    int64 message_num = 3;
+    repeated User users = 4;
+    repeated User admin_users = 5;
+    google.protobuf.Timestamp created_at = 7;
+    google.protobuf.Timestamp updated_at = 8;
+}
+
+message GetRoomDetailRequest {
+    string room_id = 1;
+}
+
+message GetRoomDetailResponse {
+    Room room = 1;
+}
+
+message IsMemberRequest {
+    string mail_address = 1;
+    string password = 2;
+}
+
+message IsMemberResponse {
+    bool is_admin  = 1;
+}
