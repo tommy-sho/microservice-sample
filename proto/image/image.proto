@@ -15,8 +15,8 @@ message Image {
     string id = 1;
     string url = 2;
     string user_id = 3;
-    int64 created_at = 4;
-    bool is_private = 5; //　non public image
+    bool is_private = 4; //　non public image
+    google.protobuf.Timestamp created_at = 5;
 }
 
 message GetImageByIDRequest {

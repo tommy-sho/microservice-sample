@@ -1,12 +1,11 @@
 syntax = "proto3";
 
-package musmus.room;
+package proto;
 
 import "google/protobuf/timestamp.proto";
-import "../user/user.proto";
+import "proto/user/user.proto";
 
 option go_package = "proto";
-
 
 service RoomService {
     rpc GetRoomDetail(GetRoomDetailRequest) returns (GetRoomDetailResponse) {}
@@ -17,8 +16,8 @@ message Room {
     string id = 1;
     string address = 2; //example: xxx.musmus.com
     int64 message_num = 3;
-    repeated User users = 4;
-    repeated User admin_users = 5;
+    repeated user.User users = 4;
+    repeated user.User admin_users = 5;
     google.protobuf.Timestamp created_at = 7;
     google.protobuf.Timestamp updated_at = 8;
 }

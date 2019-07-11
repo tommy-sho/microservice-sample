@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package musmus.channel;
+package channel;
 
 import "google/protobuf/timestamp.proto";
 
@@ -8,7 +8,7 @@ option go_package = "proto";
 
 service ChannelService {
     // チャンネルの一覧を返却
-    rpc GetChannelList(GetChannelListRequest) returns (GetChannelListResponse)
+    rpc GetChannelList(GetChannelListRequest) returns (GetChannelListResponse) {}
 }
 
 message Channel {

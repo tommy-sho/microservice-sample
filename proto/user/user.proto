@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package musmus.user;
+package user;
 
 import "google/protobuf/timestamp.proto";
 
